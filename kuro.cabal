@@ -166,7 +166,8 @@ library
                      , parallel
                      , parsers
                      , prelude-extras
-                     , prettyprinter >= 1.2.1.1
+                     -- , prettyprinter >= 1.2.1.1 -- commented for exploration
+		     , prettyprinter 
                      , primitive
                      , process
                      , random
@@ -200,7 +201,7 @@ library
                      , yaml
                      , zeromq4-haskell >= 0.6.3
                      , zlib
-  other-modules:     Paths_kadena
+  other-modules:     Paths_kuro
   hs-source-dirs:      src
   ghc-options:         -Wall -fno-warn-unused-do-bind -O3
   ghc-prof-options:    -fprof-auto -fprof-auto-calls

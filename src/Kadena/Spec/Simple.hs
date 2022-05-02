@@ -51,7 +51,7 @@ data Options = Options
   } deriving Show
 
 defaultOptions :: Options
-defaultOptions = Options { optConfigFile = ""
+defaultOptions = Options { optConfigFile = "conf/10000-cluster.yaml"
                          , optDisablePersistence = False
                          , optEnableDiagnostics = False }
 
@@ -77,6 +77,7 @@ getConfig = do
   case getOpt Permute options argv of
     (o,_,[]) -> do
       opts <- return $ foldl (flip id) defaultOptions o
+      print $ optConfigFile opts 
       conf <- Y.decodeFileEither $ optConfigFile opts
       case conf of
         Left err -> putStrLn (Y.prettyPrintParseException err) >> exitFailure

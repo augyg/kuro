@@ -9,6 +9,18 @@ For more information:
 - [ScalableBFT whitepaper](https://d31d887a-c1e0-47c2-aa51-c69f9f998b07.filesusr.com/ugd/86a16f_aeb9004965c34efd9c48993c4e63a9bb.pdf)
 - [Confidentiality whitepaper](https://d31d887a-c1e0-47c2-aa51-c69f9f998b07.filesusr.com/ugd/86a16f_29bcbfd45f9e48139e6db4e5a0fbf5f1.pdf)
 
+## Simplified Build Instructions 
+
+Eventually this will just be nix-build and nix-shell
+
+```
+nix-shell -A shells.ghc project.nix
+cabal run kadenaserver # or kadenaclient, etc, see kuro.cabal for more
+
+#Alternatively 
+cabal repl <executable>
+```
+
 ## Beta and AWS Build Instructions
 
 ### Manual Part

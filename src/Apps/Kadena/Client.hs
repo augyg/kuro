@@ -866,8 +866,8 @@ main = do
     (o,_,_) -> do
       let opts = foldl (flip id) def o
       i <- newMVar =<< initRequestId
-      (conf :: ClientConfig) <- either (\e -> print e >> exitFailure) return =<<
-        Y.decodeFileEither (_oConfig opts)
+      yamllll <- Y.decodeFileEither "conf/client.yaml" -- (_oConfig opts)
+      (conf :: ClientConfig) <- either (\e -> print e >> exitFailure) return $ yamllll
       let replState = ReplState
             { _server = fst (minimum $ HM.toList (_ccEndpoints conf))
             , _batchCmd = "\"Hello Kadena\""
