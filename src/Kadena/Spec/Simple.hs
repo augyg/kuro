@@ -154,6 +154,7 @@ runServer :: IO ()
 runServer = do
   setLineBuffering
   rconf <- getConfig
+  print "got here"
   gcm <- initGlobalConfigTMVar rconf
 
   utcTimeCache' <- utcTimeCache
