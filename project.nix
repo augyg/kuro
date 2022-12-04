@@ -9,8 +9,8 @@ pactSrc = builtins.fetchTarball {
 };
 pactProj = "${pactSrc}/project.nix";
 
-in
-  (import pactProj {}).rp.project ({ pkgs, hackGet,... }:
+in          # this stmt imports pactProj then reflex-platform's project function
+  (import pactProj {}).rp.project ({ pkgs, hackGet,... }: # anonymous function
 let
 
 gitignore = pkgs.callPackage (pkgs.fetchFromGitHub {
@@ -20,20 +20,22 @@ gitignore = pkgs.callPackage (pkgs.fetchFromGitHub {
   sha256 = "07ngzpvq686jkwkycqg0ary6c07nxhnfxlg76mlm1zv12a5d5x0i";
 }) {};
 
-in {
-    name = "kadena-umbrella";
-    overrides = import ./overrides.nix pactSrc hackGet pkgs;
+in
+{
+  name = "kadena-umbrella";
+  overrides = import ./overrides.nix pactSrc hackGet pkgs;
 
-    packages = {
-      kadena = gitignore.gitignoreSource [".git" ".gitlab-ci.yml" "CHANGELOG.md" "README.md"] ./.;
-    };
+  packages = {
+    kadena = gitignore.gitignoreSource [".git" ".gitlab-ci.yml" "CHANGELOG.md" "README.md"] ./.;
+  };
 
-    shellToolOverrides = ghc: super: {
-      z3 = pkgs.z3;
-      stack = pkgs.stack;
-    };
+  shellToolOverrides = ghc: super: {
+    z3 = pkgs.z3;
+    stack = pkgs.stack;
+  };
 
-    shells = {
-      ghc = ["kadena"];
-    };
-  })
+  shells = {
+    ghc = ["kadena"];
+  };
+})
+    
